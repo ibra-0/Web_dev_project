@@ -1,0 +1,155 @@
+/* Общие стили */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+    background-color: #ffffff;
+    margin: 0;
+    color: #262626;
+}
+
+/* Центрирующая обертка */
+.main-wrapper {
+    display: flex;
+    max-width: 1100px;
+    margin: 0 auto;
+    min-height: 85vh;
+    padding: 40px 20px;
+    align-items: flex-start;
+}
+
+/* Левая колонка */
+.left-side {
+    flex: 1.2;
+    display: flex;
+    flex-direction: column;
+}
+
+.header-logo {
+    text-align: left;
+    margin-bottom: 50px;
+}
+
+.header-logo .logo {
+    width: 175px;
+}
+
+.intro {
+    text-align: center;
+}
+
+.intro h1 {
+    font-size: 36px;
+    font-weight: 500;
+    margin-bottom: 40px;
+}
+
+/* Градиент для текста */
+.close-friends {
+    background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+     background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: bold;
+}
+
+.photo-mockup {
+    max-width: 450px;
+}
+
+/* Правая колонка */
+.right-side {
+    flex: 0.8;
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 100px;
+}
+
+.login-box {
+    width: 350px;
+    border: 1px solid #dbdbdb;
+    padding: 30px;
+    text-align: center;
+    border-radius: 1px;
+}
+
+.login-title {
+    font-weight: 600;
+    margin-bottom: 25px;
+}
+
+/* Поля ввода */
+input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    background: #fafafa;
+    border: 1px solid #dbdbdb;
+    border-radius: 3px;
+    box-sizing: border-box;
+}
+
+/* Кнопки */
+.login-btn {
+    width: 100%;
+    background-color: #0095f6;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.forgot-password {
+    display: block;
+    font-size: 12px;
+    color: #00376b;
+    text-decoration: none;
+    margin: 20px 0;
+}
+
+.divider {
+    height: 1px;
+    background-color: #dbdbdb;
+    margin: 25px 0;
+}
+
+.facebook-link {
+    color: #385185;
+    font-weight: 600;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.create-account-btn {
+    display: block;
+    border: 1px solid #0095f6;
+    color: #0095f6;
+    text-decoration: none;
+    padding: 10px;
+    border-radius: 8px;
+    font-weight: 600;
+    margin-top: 20px;
+}
+
+/* Лого Meta внизу формы */
+.meta-container {
+    margin-top: 30px;
+}
+
+.meta-logo {
+    width: 60px;
+}
+
+/* Футер */
+.page-footer {
+    text-align: center;
+    color: #8e8e8e;
+    font-size: 12px;
+    padding: 20px;
+}
+
+.footer-links span {
+    margin: 0 10px;
+    cursor: pointer;
+}
