@@ -78,6 +78,12 @@ body {
   font-size: 20px;
   font-weight: bold;
   cursor: pointer;
+  
+}
+.login-btn:hover {
+  background-color: #213853;
+  transition: background-color 1s;
+  
 }
 
 .forgot-password {

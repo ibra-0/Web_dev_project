@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>ToDo List</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: #f5f5f5;
+      display: flex;
+      justify-content: center;
+      padding: 40px;
+    }
+
+    main {
+      background: #fff;
+      width: 400px;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    form {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    input[type="text"] {
+      flex: 1;
+      padding: 8px;
+    }
+
+    button {
+      padding: 8px 12px;
+      cursor: pointer;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    li {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .task {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex: 1;
+    }
+
+    .done {
+      text-decoration: line-through;
+      color: #888;
+    }
+
+    .delete-btn {
+      background: none;
+      border: none;
+      color: red;
+      font-size: 16px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+<main>
+  <h1>ToDo List</h1>
+
+  <form id="todoForm">
+    <label for="taskInput" class="visually-hidden"></label>
+    <input type="text" id="taskInput" placeholder="New task" />
+    <button type="submit">Add</button>
+  </form>
+
+  <ul id="taskList"></ul>
+</main>
+
+<script>
+  const form = document.getElementById('todoForm');
+  const taskInput = document.getElementById('taskInput');
+  const taskList = document.getElementById('taskList');
+
+  form.addEventListener('submit', function (event) {
+    event.preventDefault();
+
+    const taskText = taskInput.value.trim();
+    if (taskText === '') {
+      return;
+    }
+
+    const listItem = document.createElement('li');
+
+    const taskContainer = document.createElement('div');
+    taskContainer.className = 'task';
+
+    const checkbox = document.createElement('input');
+    checkbox.type = 'checkbox';
+
+    const textSpan = document.createElement('span');
+    textSpan.textContent = taskText;
+
+    checkbox.addEventListener('change', function () {
+      textSpan.classList.toggle('done');
+    });
+
+    const deleteButton = document.createElement('button');
+    deleteButton.className = 'delete-btn';
+    deleteButton.textContent = '🗑';
+
+    deleteButton.addEventListener('click', function () {
+      taskList.removeChild(listItem);
+    });
+
+    taskContainer.appendChild(checkbox);
+    taskContainer.appendChild(textSpan);
+
+    listItem.appendChild(taskContainer);
+    listItem.appendChild(deleteButton);
+
+    taskList.appendChild(listItem);
+
+    taskInput.value = '';
+  });
+</script>
+
+</body>
+</html>
