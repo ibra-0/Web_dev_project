@@ -1,0 +1,12 @@
+<div class="product-card">
+   <img [src]="product.image">
+   <h3>{{ product.name }}</h3>
+   
+   <div class="controls">
+      <button (click)="product.likes = product.likes + 1">
+        ❤️ {{ product.likes }}
+      </button>
+      
+      <button (click)="removeMe()">🗑️ Удалить</button>
+   </div>
+</div>

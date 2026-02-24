@@ -1,0 +1,12 @@
+main {
+  width: 100%;
+  max-width: 1400px;   
+  display: block;
+}
+
+.category-menu {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 30px;
+}

@@ -1,42 +1,35 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Product } from '../../models/product.model';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-product-card',
   standalone: true,
+  imports: [CommonModule],
   templateUrl: './product-card.html',
-  styleUrls: ['./product-card.css'],
+  styleUrl: './product-card.css'
 })
 export class ProductCard {
-
   @Input() product!: Product;
+  @Output() favoriteToggle = new EventEmitter<void>();
 
   currentImageIndex = 0;
 
-  get currentImage(): string {
-    if (this.product.images && this.product.images.length > 0) {
-      return this.product.images[this.currentImageIndex];
-    }
-    return this.product.image;
+  onToggleFavorite() {
+    this.favoriteToggle.emit();
   }
 
-  nextImage() {
-    if (!this.product.images || this.product.images.length === 0) return;
-
-    this.currentImageIndex =
-      (this.currentImageIndex + 1) % this.product.images.length;
-  }
-
-  prevImage() {
-    if (!this.product.images || this.product.images.length === 0) return;
-
-    this.currentImageIndex =
-      (this.currentImageIndex - 1 + this.product.images.length) %
-      this.product.images.length;
+  changeImage(index: number) {
+    this.currentImageIndex = index;
   }
 
   shareWhatsApp() {
-    const url = `https://wa.me/?text=${encodeURIComponent(this.product.link)}`;
+    const message = `Посмотри, какой товар я нашел: ${this.product.link}`;
+    window.open(`https://wa.me/?text=${encodeURIComponent(message)}`, '_blank');
+  }
+
+  shareTelegram() {
+    const url = `https://t.me/share/url?url=${encodeURIComponent(this.product.link)}&text=${encodeURIComponent(this.product.name)}`;
     window.open(url, '_blank');
   }
 }

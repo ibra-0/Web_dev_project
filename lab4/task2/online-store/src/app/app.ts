@@ -1,16 +1,28 @@
-import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { ProductList } from './components/product-list/product-list';
-
+import { Component, inject } from '@angular/core';
+import { ProductService } from './services/product';
+import { ProductListComponent } from './components/product-list/product-list'; 
+import { Product } from './models/product.model'; 
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [ProductList],
-  template: '<app-product-list></app-product-list>',
+  imports: [ProductListComponent], 
+  templateUrl: './app.html',
   styleUrl: './app.css'
 })
+export class AppComponent {
+  private productService = inject(ProductService);
+  
+  categories = this.productService.getCategories();
+  selectedCategoryId: number | null = null;
+  
+  filteredProducts: Product[] = []; 
 
-export class App {
-  protected readonly title = signal('online-store');
+  selectCategory(id: number) {
+    this.selectedCategoryId = id;
+    this.filteredProducts = this.productService.getProductsByCategory(id);
+  }
+  removeProduct(id: number) {
+  this.filteredProducts = this.filteredProducts.filter(p => p.id !== id);
+}
 }
