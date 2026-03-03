@@ -1,0 +1,31 @@
+<div class="container">
+  @if (loading) {
+    <p>Loading details...</p>
+  } @else {
+    <div class="detail-card">
+      <button class="btn-back" (click)="goBack()">← Back to Albums</button>
+      
+
+      <h2>Album Details</h2>
+      <div class="info">
+        <p><strong>ID:</strong> {{ album.id }}</p>
+        <p><strong>User ID:</strong> {{ album.userId }}</p>
+      </div>
+
+      <div class="edit-box">
+        <label for="title">Album Title:</label>
+        <input id="title" [(ngModel)]="album.title" type="text" maxlength="50">
+        <div class="char-count">
+    {{ album.title.length || 0 }}/50
+  </div>
+        <button class="btn-save" (click)="saveTitle()">Save changes</button>
+      </div>
+
+      <div class="navigation-links">
+        <a [routerLink]="['/albums', album.id, 'photos']" class="btn-photos">
+          🖼️ View Photos
+        </a>
+      </div>
+    </div>
+  }
+</div>

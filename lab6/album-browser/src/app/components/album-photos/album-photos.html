@@ -1,0 +1,20 @@
+<div class="photos-page">
+  <button class="btn-back" [routerLink]="['/albums', albumId]">
+    ← Back to Album Details
+  </button>
+
+  <h2>Photos of Album #{{ albumId }}</h2>
+
+  @if (loading) {
+    <p>Loading photos...</p>
+  } @else {
+    <div class="photo-grid">
+      @for (photo of photos; track photo.id) {
+        <div class="photo-card">
+          <img [src]="photo.thumbnailUrl" [alt]="photo.title">
+          <p class="photo-title">{{ photo.title }}</p>
+        </div>
+      }
+    </div>
+  }
+</div>
