@@ -10,3 +10,26 @@ main {
   gap: 10px;
   margin-bottom: 30px;
 }
+.layout {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+/* Левая колонка */
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.sidebar button {
+  padding: 10px;
+  cursor: pointer;
+}
+
+/* Правая часть */
+.content {
+  width: 100%;
+}

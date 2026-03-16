@@ -1,5 +1,8 @@
-<div class="card">
-  <img [src]="product.images[currentImageIndex]" [alt]="product.name" class="product-image">
+<div class="product-card"
+     [ngClass]="{
+       'popular': product.likes >= 5 && product.likes < 10,
+       'super-popular': product.likes >= 10
+     }">  <img [src]="product.images[currentImageIndex]" [alt]="product.name" class="product-image">
 
   <div class="thumbnail-container">
     <img 
