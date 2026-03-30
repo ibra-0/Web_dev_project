@@ -1,20 +1,22 @@
-from models import Vehicle, Car, Motorcycle
+from models import Product, Phone, Laptop
 
-def main():
-    vehicle1 = Vehicle("Generic", "Transporter", 2020)
-    car1 = Car("Toyota", "Camry", 2023, 4)
-    moto1 = Motorcycle("Yamaha", "R6", 2022, "Sport")
+p1 = Phone("iPhone 15", 499000, 4.8, "Apple")
+p2 = Phone("Samsung S24", 459000, 4.7, "Samsung")
 
-    vehicles = [vehicle1, car1, moto1]
+l1 = Laptop("MacBook Air M2", 899000, 4.9, 16)
+l2 = Laptop("Asus TUF Gaming", 650000, 4.6, 32)
 
-    for v in vehicles:
-        print(v)  
-        print(v.start())  
-        print(v.stop())
-        print("-" * 40)
+products = [p1, p2, l1, l2]
 
-    print(car1.open_trunk())
-    print(moto1.do_wheelie())
+for product in products:
+    print(product)                
+    print(product.get_info())      
+    print(product.get_rating())
 
-if __name__ == "__main__":
-    main()
+    if isinstance(product, Phone):
+        print(product.call())
+
+    if isinstance(product, Laptop):
+        print(product.code())
+
+    print("------")

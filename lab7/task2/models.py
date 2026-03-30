@@ -1,44 +1,38 @@
-class Vehicle:
-    def __init__(self, brand, model, year):
+class Product:
+    def __init__(self, name, price, rating):
+        self.name = name
+        self.price = price
+        self.rating = rating
+
+    def get_info(self):
+        return f"{self.name} costs {self.price}₸"
+
+    def get_rating(self):
+        return f"Rating: {self.rating}"
+
+    def __str__(self):
+        return f"{self.name} | {self.price}₸ | ⭐ {self.rating}"
+
+
+class Phone(Product):
+    def __init__(self, name, price, rating, brand):
+        super().__init__(name, price, rating)
         self.brand = brand
-        self.model = model
-        self.year = year
 
-    def start(self):
-        return f"{self.brand} {self.model} is starting."
+    def get_info(self):  
+        return f"{self.brand} phone: {self.name} costs {self.price}₸"
 
-    def stop(self):
-        return f"{self.brand} {self.model} has stopped."
-
-    def __str__(self):
-        return f"{self.year} {self.brand} {self.model}"
+    def call(self):
+        return f"{self.name} is calling..."
 
 
-class Car(Vehicle):
-    def __init__(self, brand, model, year, doors):
-        super().__init__(brand, model, year)
-        self.doors = doors
+class Laptop(Product):
+    def __init__(self, name, price, rating, ram):
+        super().__init__(name, price, rating)
+        self.ram = ram
 
-    def start(self):
-        return f"{self.brand} {self.model} (Car) engine is roaring to life!"
+    def get_info(self):  
+        return f"Laptop {self.name} with {self.ram}GB RAM costs {self.price}₸"
 
-    def open_trunk(self):
-        return f"{self.brand} {self.model} trunk is now open."
-
-    def __str__(self):
-        return f"{super().__str__()} with {self.doors} doors"
-
-
-class Motorcycle(Vehicle):
-    def __init__(self, brand, model, year, type_motorcycle):
-        super().__init__(brand, model, year)
-        self.type_motorcycle = type_motorcycle
-
-    def start(self):
-        return f"{self.brand} {self.model} (Motorcycle) is revving!"
-
-    def do_wheelie(self):
-        return f"{self.brand} {self.model} is performing a wheelie!"
-
-    def __str__(self):
-        return f"{super().__str__()} ({self.type_motorcycle})"
+    def code(self):
+        return f"Coding on {self.name}..."
