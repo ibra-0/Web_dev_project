@@ -1,0 +1,428 @@
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+li {
+  background: #f1f5f9;
+  margin: 5px 0;
+  padding: 8px 12px;
+  border-radius: 6px;
+  border-left: 4px solid #3b82f6;
+  font-weight: 500;
+}
+.tournaments-list-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+}
+
+.tournaments-list-table th, 
+.tournaments-list-table td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.btn-select {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.btn-select:hover {
+  background-color: #0056b3;
+}
+
+.details-section {
+  margin-top: 30px;
+  border-top: 3px solid #007bff;
+}
+.modern-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  color: #1e293b; /* Более темный, насыщенный цвет текста */
+  margin-top: 10px;
+}
+
+/* Стили для текста в ячейках (чтобы названия были четкими) */
+.modern-table td {
+  padding: 12px;
+  border-bottom: 1px solid #eee;
+  color: #1e293b; /* Явное указание цвета для всех ячеек */
+}
+
+/* Стили для названий внутри strong (если используешь этот тег в HTML) */
+.modern-table td strong {
+  color: #0f172a; /* Почти черный для акцента на названиях клубов */
+}
+
+.badge {
+  background: #e9ecef;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.85em;
+  text-transform: uppercase;
+}
+
+.btn-view {
+  background: #28a745;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.btn-view:hover {
+  background: #218838;
+}
+.modern-table.finished {
+  background-color: #f8fafc; /* Легкий сероватый фон, чтобы отличить от активных */
+  border: 1px solid #e2e8f0;
+}
+
+.modern-table.finished td {
+  color: #475569; /* Тёмно-серый вместо светлого #888 — теперь будет видно хорошо */
+}
+
+.modern-table.finished td strong {
+  color: #334155; /* Названия победителей в завершенных тоже станут четче */
+}
+
+/* Заголовки таблиц */
+.modern-table th {
+  background-color: #f1f5f9;
+  color: #475569; /* Цвет заголовков (P, W, D, L и т.д.) */
+  padding: 12px;
+  text-align: left;
+  border-bottom: 2px solid #cbd5e1;
+  font-weight: 600;
+}
+
+.badge {
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: bold;
+  background: #eee;
+}
+
+.club-checkbox {
+  display: block;
+  padding: 5px;
+  cursor: pointer;
+}
+
+.club-checkbox:hover {
+  background: #f0f7ff;
+}
+/* Подсветка строки, которую раскрыли */
+.expanded-row {
+  background-color: #f1f5f9 !important;
+  border-left: 4px solid #28a745;
+}
+
+.details-content {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Убираем лишние бордеры внутри вложенной таблицы */
+.details-content h4 {
+  margin-top: 0;
+  color: #2c3e50;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 10px;
+}
+.winner-announcement {
+  text-align: center;
+  background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
+  padding: 30px;
+  border-radius: 15px;
+  margin-bottom: 20px;
+  color: #fff;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+.winner-name {
+  font-size: 3rem;
+  text-transform: uppercase;
+  margin: 10px 0;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+.is-winner {
+  background-color: rgba(40, 167, 69, 0.1) !important;
+  font-weight: bold;
+}
+
+.crown {
+  font-size: 40px;
+}
+/* ОБЩИЕ СТИЛИ ДЛЯ ДЕТАЛЕЙ ТУРНИРА */
+.tournament-details {
+    background: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    padding: 25px;
+    border-top: 5px solid #3498db;
+}
+
+.details-header h2 {
+    color: #2c3e50;
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* СТИЛИ ДЛЯ ТАБЛИЦЫ ЛИГИ */
+.standings-section {
+    margin-top: 20px;
+}
+
+.pts-badge {
+    background: #34495e;
+    color: #fff;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-weight: bold;
+}
+
+.is-winner {
+    background-color: rgba(46, 204, 113, 0.1) !important;
+}
+
+.is-winner td {
+    color: #27ae60;
+    font-weight: bold;
+}
+
+/* КОНТЕЙНЕР ПЛЕЙ-ОФФ */
+.playoff-container {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    margin-top: 20px;
+}
+
+.status-title, .round-title {
+    color: #7f8c8d;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 1.2px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 5px;
+}
+
+/* СЕТКА МАТЧЕЙ (GRID) */
+.matches-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+/* КАРТОЧКА МАТЧА */
+.match-card {
+    background: #f8f9fa;
+    border-radius: 12px;
+    padding: 15px;
+    transition: all 0.3s ease;
+    border: 1px solid #e1e8ed;
+}
+
+.match-card.live {
+    background: #fff;
+    border: 2px solid #3498db;
+    box-shadow: 0 5px 15px rgba(52, 152, 219, 0.15);
+}
+
+.match-card.finished {
+    opacity: 0.9;
+}
+
+/* ОТОБРАЖЕНИЕ СЧЕТА */
+.score-display {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin: 10px 0;
+}
+
+.score-box {
+    background: #2c3e50;
+    color: white;
+    min-width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    font-family: 'monospace';
+}
+
+.vs {
+    font-weight: bold;
+    color: #bdc3c7;
+    font-size: 0.8rem;
+}
+
+/* ИНФОРМАЦИЯ О КОМАНДЕ В ПЛЕЙ-ОФФ */
+.team-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 12px;
+    border-radius: 6px;
+    margin: 2px 0;
+    color: #34495e;
+}
+
+.team-info.winner {
+    background: #2ecc71;
+    color: white;
+}
+
+.team-text {
+    font-weight: 500;
+    max-width: 80%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.final-score {
+    font-weight: bold;
+}
+
+/* КНОПКИ АДМИНА */
+.admin-actions {
+    background: #f4f7f6;
+    padding: 20px;
+    border-radius: 12px;
+    margin-top: 30px;
+}
+
+.btn-create {
+    padding: 12px 25px;
+    border-radius: 8px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: transform 0.2s, background 0.2s;
+    border: none;
+    cursor: pointer;
+    color: white;
+}
+
+.btn-create:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.1);
+}
+
+/* АНИМАЦИЯ ДЛЯ ТЕКУЩИХ МАТЧЕЙ */
+@keyframes pulse-blue {
+    0% { border-color: #3498db; }
+    50% { border-color: #5dade2; }
+    100% { border-color: #3498db; }
+}
+
+.match-card.live {
+    animation: pulse-blue 2s infinite;
+}
+
+/* ПОБЕДИТЕЛЬ ТУРНИРА (BANNER) */
+.winner-announcement {
+    background: linear-gradient(135deg, #f1c40f 0%, #f39c12 100%);
+    color: white;
+    text-align: center;
+    padding: 30px;
+    border-radius: 12px;
+    margin-bottom: 25px;
+}
+
+.winner-name {
+    font-size: 2.5rem;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+}
+/* Стиль для автоматического прохода */
+.auto-pass-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 10px;
+    color: #2c3e50;
+}
+
+.badge-pass {
+    font-size: 0.75rem;
+    background: #e8f4fd;
+    color: #3498db;
+    padding: 4px 12px;
+    border-radius: 20px;
+    border: 1px solid #d1e9f9;
+}
+
+/* Красивый заголовок текущего раунда */
+.live-title {
+    color: #e74c3c !important;
+    font-weight: 800;
+    border-left: 4px solid #e74c3c !important;
+    background: linear-gradient(90deg, #fdf2f2, transparent);
+    padding: 10px !important;
+}
+
+/* Скрываем пустые разделители в истории */
+.match-card.finished:empty {
+    display: none;
+}
+
+.history-section {
+    border-top: 2px dashed #eee;
+    padding-top: 20px;
+    animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+.history-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.round-badge-small {
+  font-size: 0.7rem;
+  font-weight: bold;
+  color: #95a5a6;
+  text-transform: uppercase;
+  margin-top: 10px;
+  margin-bottom: -5px;
+  padding-left: 5px;
+}
+
+.match-card.finished {
+  border-left: 4px solid #bdc3c7;
+}
+
+/* Выделение финала в истории */
+.match-card.finished:has(+ .round-badge-small:empty) {
+  border-left-color: #f1c40f;
+}

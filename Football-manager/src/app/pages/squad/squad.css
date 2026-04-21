@@ -1,0 +1,242 @@
+/* Основной контейнер */
+.pitch-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  background-color: #1a1a1a;
+  min-height: 100vh;
+}
+
+/* Футбольное поле */
+.football-pitch {
+  position: relative;
+  width: 100%;
+  max-width: 500px;
+  height: 650px;
+  background-color: #2e7d32;
+  border: 4px solid rgba(255, 255, 255, 0.8);
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 30px 10px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  
+  background-image: 
+    linear-gradient(rgba(255, 255, 255, 0.05) 50%, transparent 50%),
+    radial-gradient(circle at center, transparent 59px, white 60px, transparent 61px);
+  background-size: 100% 80px, 100% 100%;
+}
+
+/* Линии игроков */
+.pitch-line {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  z-index: 10;
+}
+
+/* Общий слот игрока */
+.player-slot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 80px; /* Фиксированная ширина, чтобы тексты не толкали друг друга */
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+/* Только круг с иконкой */
+.player-card {
+  width: 45px;
+  height: 45px;
+  background-color: #ffffff;
+  border-radius: 50%;
+  border: 3px solid #1976d2;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+  margin-bottom: 5px;
+  
+  /* Иконка футболки */
+  background-image: url('https://cdn-icons-png.flaticon.com/512/53/53254.png');
+  background-size: 60%;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* Вратарь */
+.gk-card {
+  border-color: #fbc02d;
+}
+
+/* Блок с именем и позицией (под кругом) */
+.player-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.player-name {
+  color: white;
+  font-size: 11px;
+  font-weight: bold;
+  text-shadow: 1px 1px 3px rgba(0,0,0,1); /* Более плотная тень для читаемости */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 80px;
+  text-align: center;
+}
+
+.pos-badge {
+  font-size: 9px;
+  background: #1976d2;
+  color: white;
+  padding: 2px 5px;
+  border-radius: 3px;
+  margin-top: 3px;
+  text-transform: uppercase;
+}
+
+/* Эффект выделения (клик) */
+.player-slot.selected {
+  transform: scale(1.15);
+  filter: drop-shadow(0 0 8px #f1c40f);
+}
+
+.player-slot.selected .player-card {
+  border-color: #f1c40f;
+  background-color: #fff9e6; /* Легкая подсветка внутри круга */
+}
+
+/* Смещение CDM */
+.offset-down {
+  transform: translateY(25px);
+}
+
+/* --- ЗАПАСНЫЕ ИГРОКИ --- */
+.bench-container {
+  margin-top: 30px;
+  width: 100%;
+  max-width: 500px;
+  color: white;
+}
+
+.bench-container h3 {
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+.bench-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 10px;
+}
+
+.bench-player {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 10px 15px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  border: 1px solid rgba(255,255,255,0.1);
+  transition: 0.2s;
+}
+
+.bench-player:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.bench-player.selected {
+  background: rgba(241, 196, 15, 0.2);
+  border-color: #f1c40f;
+}
+
+.bench-pos {
+  font-size: 10px;
+  background: #555;
+  color: white;
+  padding: 3px 6px;
+  border-radius: 4px;
+  min-width: 30px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.bench-name {
+  font-size: 13px;
+  flex-grow: 1; /* Выталкивает рейтинг вправо */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.bench-rating {
+  font-weight: bold;
+  color: #f1c40f;
+  font-size: 14px;
+}
+.no-edit .player-slot,
+.no-edit .bench-player {
+  pointer-events: none;
+  cursor: default;
+  opacity: 0.8;
+}
+
+.player-slot:not(.disabled),
+.bench-player:not(.disabled) {
+  cursor: pointer;
+}
+
+.player-slot.disabled,
+.bench-player.disabled {
+  cursor: default;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed; /* 🔥 фиксирует структуру */
+}
+
+th, td {
+  text-align: center;
+  vertical-align: middle;
+  padding: 12px;
+  word-wrap: break-word;
+}
+
+th:nth-child(1),
+td:nth-child(1) {
+  width: 40%;
+}
+
+th:nth-child(2),
+td:nth-child(2) {
+  width: 20%;
+}
+
+th:nth-child(3),
+td:nth-child(3) {
+  width: 20%;
+}
+
+th:nth-child(4),
+td:nth-child(4) {
+  width: 20%;
+}
+select {
+  font-size: 16px;        /* 🔥 ключевой фикс */
+  padding: 8px 12px;
+  border-radius: 8px;
+}
+
+option {
+  font-size: 16px;        /* важно — Chrome иногда игнорирует select */
+}
+.dropdown, .select-menu {
+  font-size: 16px !important;
+}

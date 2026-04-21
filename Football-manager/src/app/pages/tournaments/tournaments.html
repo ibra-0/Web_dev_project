@@ -1,0 +1,199 @@
+<div class="tournaments-container">
+  @if (userRole === 'superuser' || userRole === 'manager') {
+    <div class="card creation-card">
+      <h3>🏆 Create New Tournament</h3>
+      <div class="form-grid">
+        <input [(ngModel)]="tName" placeholder="Tournament Name" class="modern-input">
+        <input type="number" [(ngModel)]="tPrize" placeholder="Prize Pool ($)" class="modern-input">
+
+        <select [(ngModel)]="tType" class="modern-select">
+          <option value="league">League System</option>
+          <option value="playoff">Play-off (Knockout)</option>
+        </select>
+      </div>
+
+      <div class="club-selection">
+        <h4>Select Participating Teams:</h4>
+        <div class="clubs-scroll">
+          <div *ngFor="let club of clubs" class="club-checkbox">
+            <label>
+              <input type="checkbox" (change)="toggleClub(club.id)" [checked]="selectedClubIds.includes(club.id)">
+              {{ club.name }}
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <button class="btn-create" (click)="createTournament()">Create Tournament</button>
+    </div>
+  }
+
+  <div class="card">
+    <h3>📁 Active Tournaments</h3>
+    <table class="modern-table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Teams</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (t of activeTournaments; track t.id) {
+          <tr>
+            <td><strong>{{ t.name }}</strong></td>
+            <td><span class="badge">{{ t.tournament_type }}</span></td>
+            <td>{{ t.teams?.length }}</td>
+            <td>
+              <button class="btn-view" (click)="viewTournament(t)">View</button>
+              @if (userRole === 'superuser') {
+                <button class="btn-delete" (click)="deleteTournament(t.id)">Delete</button>
+              }
+            </td>
+          </tr>
+        } @empty {
+          <tr><td colspan="4" class="empty-msg">No active tournaments.</td></tr>
+        }
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card finished-card" style="margin-top: 20px; opacity: 0.9;">
+    <h3>✅ Completed Tournaments (Archive)</h3>
+    <table class="modern-table archive-table">
+      <thead>
+        <tr>
+          <th>Tournament Name</th>
+          <th>Type</th>
+          <th>🏆 Winner</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (t of finishedTournaments; track t.id) {
+          <tr style="background-color: #f8f9fa;">
+            <td>{{ t.name }}</td>
+            <td><span class="badge gray">{{ t.tournament_type }}</span></td>
+            <td>
+              <strong style="color: #28a745;">🥇 {{ getClubName(t.winner) }}</strong>
+            </td>
+            <td>
+              <button class="btn-view" (click)="viewTournament(t)">View Results</button>
+            </td>
+          </tr>
+        } @empty {
+          <tr><td colspan="4" class="empty-msg">Archive is empty.</td></tr>
+        }
+      </tbody>
+    </table>
+  </div>
+@if (selectedTournament) {
+  <div class="card tournament-details">
+    <div class="details-header">
+      <h2>🏆 {{ selectedTournament.name }}</h2>
+      <button class="btn-close" (click)="closeDetails()">✖ Close</button>
+    </div>
+
+    @if (selectedTournament.winner) {
+      <div class="winner-announcement">
+        <div class="crown">👑</div>
+        <p>ОФИЦИАЛЬНЫЙ ЧЕМПИОН</p>
+        <h1 class="winner-name">{{ getClubName(selectedTournament.winner) }}</h1>
+      </div>
+    }
+
+    @if (selectedTournament.tournament_type === 'league') {
+      <div class="standings-section">
+        <h4>Турнирная таблица</h4>
+        <table class="modern-table">
+          <thead>
+            <tr>
+              <th>Клуб</th> <th>И</th> <th>В</th> <th>Н</th> <th>П</th> <th>Очки</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (team of calculateStandings(tournamentMatches, selectedTournament.teams); track team.id) {
+              <tr [class.is-winner]="team.id === selectedTournament.winner">
+                <td><strong>{{ team.name }}</strong></td>
+                <td>{{ team.p }}</td> <td>{{ team.w }}</td> <td>{{ team.d }}</td>
+                <td>{{ team.l }}</td>
+                <td><span class="pts-badge">{{ team.pts }}</span></td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    }
+
+    @if (selectedTournament.tournament_type === 'playoff') {
+      <div class="playoff-visualizer">
+        
+        @if (currentRoundMatches.length > 0 && !selectedTournament.winner) {
+          <div class="round-section">
+            <h4 class="round-title live-title">🔥 {{ currentRoundName }}</h4>
+            <div class="matches-grid">
+              @for (match of currentRoundMatches; track $index) {
+                <div class="match-card live">
+                  @if (match.away_team) {
+                    <div class="team-name">{{ getClubName(match.home_team) }}</div>
+                    <div class="score-display">
+                      <span class="score-box">{{ match.is_played ? match.home_score : '?' }}</span>
+                      <span class="vs">VS</span>
+                      <span class="score-box">{{ match.is_played ? match.away_score : '?' }}</span>
+                    </div>
+                    <div class="team-name">{{ getClubName(match.away_team) }}</div>
+                  } @else {
+                    <div class="auto-pass-box">
+                      <strong>{{ getClubName(match.home_team) }}</strong> 
+                      <span class="badge-pass">Проходит дальше автоматически ✨</span>
+                    </div>
+                  }
+                </div>
+              }
+            </div>
+          </div>
+        }
+
+        @if (tournamentMatches.length > 0) {
+          <div class="round-section history-section">
+            <h4 class="round-title">📋 История матчей</h4>
+            <div class="history-list">
+              @for (match of tournamentMatches; track $index) {
+                @if (match.away_team) {
+                  <div class="round-label">{{ match.round_name }}</div>
+                  <div class="match-card finished">
+                    <div class="team-info" [class.winner]="match.home_score > match.away_score">
+                      <span class="team-text">{{ getClubName(match.home_team) }}</span>
+                      <span class="final-score">{{ match.home_score }}</span>
+                    </div>
+                    <div class="divider"></div>
+                    <div class="team-info" [class.winner]="match.away_score > match.home_score">
+                      <span class="team-text">{{ getClubName(match.away_team) }}</span>
+                      <span class="final-score">{{ match.away_score }}</span>
+                    </div>
+                  </div>
+                }
+              }
+            </div>
+          </div>
+        }
+      </div>
+    }
+
+    @if (!selectedTournament.winner && (userRole === 'superuser' || userRole === 'manager')) {
+      <div class="admin-actions">
+        @if (selectedTournament.tournament_type === 'league') {
+          <button class="btn-create" (click)="playLeagueRound()">🚀 Начать симуляцию сезона</button>
+        }
+        @if (selectedTournament.tournament_type === 'playoff') {
+          @if (currentRoundMatches.length === 0) {
+            <button class="btn-create" (click)="generateFirstRound()" style="background-color: #3498db;">🎲 Создать сетку</button>
+          } @else {
+            <button class="btn-create" (click)="playPlayoffRound()" style="background-color: #27ae60;">⚽ Играть раунд</button>
+          }
+        }
+      </div>
+    }
+  </div>
+}

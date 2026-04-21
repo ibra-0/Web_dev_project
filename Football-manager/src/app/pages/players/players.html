@@ -1,0 +1,68 @@
+<div class="players-container">
+@if (userRole === 'superuser' || userRole === 'manager') {
+    <div class="card add-player-card">
+      <h3><span class="icon">➕</span> Add New Player</h3>
+      <div class="form-grid">
+        <input [(ngModel)]="newPlayer.name" placeholder="Name">
+        
+        <select [(ngModel)]="newPlayer.position">
+          @for (pos of positions; track pos) { 
+            <option [value]="pos">{{pos}}</option> 
+          }
+        </select>
+
+        <input type="number" [(ngModel)]="newPlayer.rating" placeholder="Rating">
+        <input type="number" [(ngModel)]="newPlayer.age" placeholder="Age">
+
+        <select [(ngModel)]="newPlayer.club">
+          <option [ngValue]="null">Free Agent</option>
+          @for (club of clubs; track club.id) {
+            <option [ngValue]="club.id">{{ club.name }}</option>
+          }
+        </select>
+
+        <input type="number" [(ngModel)]="newPlayer.price" placeholder="Price ($)">
+        <button class="btn-add" (click)="addPlayer()">Add Player</button>
+      </div>
+    </div>
+  }
+  <div class="controls-row">
+    <div class="search-box">
+      <input [(ngModel)]="searchQuery" (input)='onSearch()' placeholder="🔍 Search...">
+    </div>
+    <button class="btn-sort" (click)="sortByRating()">Sort by Rating</button>
+  </div>
+
+  <div class="card list-card">
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Pos</th>
+          <th>Rating</th>
+          <th>Age</th>
+          <th>Price</th>
+          <th>Club</th> 
+        </tr>
+      </thead>
+      <tbody>
+        @for (player of filteredPlayers; track player.id) {
+          <tr>
+            <td><strong>{{player.name}}</strong></td>
+            <td><span class="badge">{{player.position}}</span></td>
+            <td>⭐ {{player.rating}}</td>
+            <td>{{player.age}} y.o.</td>
+            <td>{{player.price | number}}$</td>
+            <td>
+              @if (player.club_name) {
+                <span class="club-tag">{{player.club_name}}</span>
+              } @else {
+                <span class="free-agent-text">Free Agent</span>
+              }
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>

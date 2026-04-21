@@ -1,0 +1,18 @@
+.signup-redirect {
+  margin-top: 15px;
+  font-size: 14px;
+  color: #666;
+}
+
+.link-style {
+  color: #007bff; 
+  cursor: pointer; 
+  font-weight: bold;
+  text-decoration: underline; 
+  transition: color 0.3s ease;
+}
+
+.link-style:hover {
+  color: #0056b3; 
+  text-decoration: none;
+}

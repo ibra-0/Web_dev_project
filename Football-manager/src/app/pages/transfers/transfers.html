@@ -1,0 +1,88 @@
+<div class="transfers-container">
+  
+  @if (userRole === 'superuser' || userRole === 'manager') {
+    <div class="card transfer-card">
+      <h3><span class="icon">🔄</span> Market Transfer</h3>
+      <div class="transfer-form">
+        
+        <div class="input-group">
+          <label>Select Player:</label>
+          <select [(ngModel)]="selectedPlayerId" (change)="onPlayerSelect()">
+            <option [ngValue]="null" disabled>Choose a player...</option>
+            @for (player of players; track player.id) {
+              <option [ngValue]="player.id">{{ player.name }} ({{ player.club_name || 'Free Agent' }})</option>
+            }
+          </select>
+          
+          @if (selectedPlayer) {
+            <div class="market-value-info">
+              <div class="value-row">
+                <span>Market Value:</span>
+                <strong class="value-amount">{{ selectedPlayer.price | number }}$</strong>
+              </div>
+              <div class="range-row">
+                <small>Allowed transfer range (±20%):</small>
+                <div class="range-badges">
+                  <span class="badge min">{{ minAllowedPrice | number }}$</span>
+                  <span class="arrow">↔</span>
+                  <span class="badge max">{{ maxAllowedPrice | number }}$</span>
+                </div>
+              </div>
+            </div>
+          }
+        </div>
+
+        <div class="input-group">
+          <label>To Club:</label>
+          <select [(ngModel)]="selectedClubId">
+            <option [ngValue]="null" disabled>Choose destination club...</option>
+            @for (club of clubs; track club.id) {
+              <option [ngValue]="club.id">{{ club.name }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="input-group">
+          <label>Transfer Price ($):</label>
+          <input type="number" [(ngModel)]="transferPrice" placeholder="Enter amount">
+        </div>
+
+        <button class="btn-transfer" (click)="makeTransfer()">Complete Transfer</button>
+      </div>
+    </div>
+  }
+
+  <div class="card history-card">
+    <h3><span class="icon">📜</span> Transfer History</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Player</th>
+          <th>From</th>
+          <th>To</th>
+          <th>Fee</th>
+          <th>Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (t of transfers; track t.id) {
+          <tr>
+            <td><strong>{{ t.player_name }}</strong></td>
+            <td>
+              <span class="club-tag from">{{ t.from_club_name || 'Free Agent' }}</span>
+            </td>
+            <td>
+              <span class="club-tag to">{{ t.to_club_name }}</span>
+            </td>
+            <td class="price-text">{{ t.price | number }}$</td>
+            <td class="date-text">{{ t.date | date:'shortDate' }}</td>
+          </tr>
+        } @empty {
+          <tr>
+            <td colspan="5" class="empty-msg">No transfers yet.</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>

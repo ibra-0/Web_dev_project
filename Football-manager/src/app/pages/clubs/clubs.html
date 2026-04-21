@@ -1,0 +1,75 @@
+<div class="container">
+  
+  @if (userRole === 'superuser') {
+    <div class="card add-club-form">
+      <h3><span class="icon">➕</span> Add New Club</h3>
+      <div class="form-grid">
+        <div class="input-group">
+          <label>Club Name</label>
+          <input type="text" [(ngModel)]="newClubName" placeholder="e.g. Real Madrid">
+        </div>
+        <div class="input-group">
+          <label>City</label>
+          <input type="text" [(ngModel)]="newClubCity" placeholder="e.g. Madrid">
+        </div>
+        <div class="input-group">
+          <label>Starting Budget ($)</label>
+          <input type="number" [(ngModel)]="newClubBudget" placeholder="1000000">
+        </div>
+      </div>
+      <button class="btn-add" (click)="addClub()">Create Club</button>
+    </div>
+    <hr class="divider">
+  }
+
+  @if (isLoading) {
+    <div class="loader-container">
+      <div class="spinner"></div>
+      <p>Loading clubs data...</p>
+    </div>
+  } @else {
+    <div class="card table-card">
+      <table>
+        <thead>
+          <tr>
+            <th>Club Name & City</th>
+            <th>Budget</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (club of clubs; track club.id) {
+            <tr>
+              <td>
+                <div class="club-info">
+                  <span class="club-name">{{ club.name }}</span>
+                  <span class="club-city">{{ club.city }}</span>
+                </div>
+              </td>
+              <td>
+                <span class="budget-badge">{{ club.budget | number }}$</span>
+              </td>
+              <td class="actions-cell">
+                <button [routerLink]="['/squad', club.id]" class="btn-squad">Squad</button>
+                
+                @if (userRole === 'superuser') {
+                  <button class="btn-delete" (click)="deleteClub(club.id)">
+                    <span class="icon">🗑️</span> Delete
+                  </button>
+                }
+
+                @if (userRole === 'manager' && club.id === myClubId) {
+                  <span class="my-club-badge">⭐ Your Club</span>
+                }
+              </td>
+            </tr>
+          } @empty {
+            <tr>
+              <td colspan="3" class="empty-msg">No clubs found.</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

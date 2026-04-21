@@ -1,0 +1,42 @@
+<div class="auth-card">
+  <h2>Create Account</h2>
+  
+  <div class="input-group">
+    <label>Username</label>
+    <input type="text" [(ngModel)]="username" placeholder="Enter username">
+  </div>
+
+  <div class="input-group">
+    <label>Password</label>
+    <input type="password" [(ngModel)]="password" placeholder="Enter password">
+  </div>
+
+  <div class="input-group">
+    <label>Account Type</label>
+    <select [(ngModel)]="role" class="form-select">
+      <option value="user">Regular User</option>
+      <option value="manager">Manager</option>
+      <option value="superuser">Superuser</option>
+    </select>
+  </div>
+
+  <div class="input-group" *ngIf="role === 'manager'">
+  <label>Select Your Club (Available: {{ availableClubs.length }})</label>
+  <select [(ngModel)]="selectedClubId" class="form-select">
+    <option [ngValue]="null" disabled>-- Choose a Club --</option>
+    <option *ngFor="let club of availableClubs" [ngValue]="club.id">
+      {{ club.name }}
+    </option>
+  </select>
+  
+  <div *ngIf="availableClubs.length === 0" style="color: #ffcc00; font-size: 12px; margin-top: 5px;">
+    ⚠️ All
+  </div>
+</div>
+
+  <button (click)="register()" [disabled]="role === 'manager' && !selectedClubId">
+    Sign Up
+  </button>
+  
+  <p>Already have an account? <a routerLink="/login">Login</a></p>
+</div>

@@ -1,0 +1,36 @@
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 10px;
+    align-items: center;
+}
+
+select, input {
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+}
+
+.club-tag {
+    background: #e0f2fe;
+    color: #0369a1;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 500;
+    border: 1px solid #bae6fd;
+}
+
+.free-agent-text {
+    color: #94a3b8;
+    font-style: italic;
+    font-size: 13px;
+}
+
+.badge {
+    background: #f3f4f6;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-weight: bold;
+}

@@ -1,0 +1,86 @@
+<div class="matches-container">
+  <h2>⚽ Matches</h2>
+
+  @if (userRole === 'superuser' || userRole === 'manager') {
+    <div class="match-form">
+
+      <div class="select-row">
+        <select [(ngModel)]="homeClub">
+          <option [ngValue]="null" disabled>Home Club</option>
+          @for (club of clubs; track club.id) {
+            <option [ngValue]="club.id">{{ club.name }}</option>
+          }
+        </select>
+
+        <span>vs</span>
+
+        <select [(ngModel)]="awayClub">
+          <option [ngValue]="null" disabled>Away Club</option>
+          @for (club of clubs; track club.id) {
+            <option [ngValue]="club.id">{{ club.name }}</option>
+          }
+        </select>
+      </div>
+
+      <div class="score-row">
+        <input type="number" [(ngModel)]="homeScore" placeholder="Home score">
+        <input type="number" [(ngModel)]="awayScore" placeholder="Away score">
+      </div>
+
+      <button (click)="createMatch()">Create Match</button>
+    </div>
+
+    <hr>
+  }
+
+  <h2>Match History</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Home Team</th>
+        <th>Score</th>
+        <th>Away Team</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      @for (match of matches; track match.id) {
+        <tr>
+
+          <!-- HOME -->
+          <td class="team-cell">
+            <img 
+              [src]="getClubLogo(match.home_team)" 
+              class="team-logo"
+              alt="home"
+            />
+            <span>{{ getClubName(match.home_team) }}</span>
+          </td>
+
+          <!-- SCORE -->
+          <td class="score-cell">
+            <strong>{{ match.home_score }} : {{ match.away_score }}</strong>
+          </td>
+
+          <!-- AWAY -->
+          <td class="team-cell">
+            <img 
+              [src]="getClubLogo(match.away_team)" 
+              class="team-logo"
+              alt="away"
+            />
+            <span>{{ getClubName(match.away_team) }}</span>
+          </td>
+
+        </tr>
+      } @empty {
+        <tr>
+          <td colspan="3" style="text-align: center;">
+            No matches played yet.
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>

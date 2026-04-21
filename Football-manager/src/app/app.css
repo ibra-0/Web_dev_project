@@ -1,0 +1,102 @@
+/* Глобальные настройки в стиле FM Modern */
+body {
+  background: #0f172a; /* Глубокий темно-синий */
+  color: #f1f5f9;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  margin: 0;
+}
+
+.app-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Шапка и Навигация */
+header h1 {
+  font-size: 2rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  /* Градиент только для текста, мяч не трогаем в HTML через отдельный span */
+  background: linear-gradient(to right, #38bdf8, #22c55e);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 20px;
+}
+
+/* Фикс для мяча: если он внутри h1, этот класс в HTML вернет ему цвет */
+.ball-emoji {
+  -webkit-text-fill-color: initial;
+  background: none;
+  filter: none !important;
+}
+
+nav {
+  background: rgba(30, 41, 59, 0.7);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 12px 25px;
+  border-radius: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  position: sticky;
+  top: 10px;
+  z-index: 100;
+}
+
+nav a {
+  color: #94a3b8;
+  text-decoration: none;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+nav a:hover, nav a.active {
+  color: #38bdf8;
+}
+
+/* ОБНОВЛЕННЫЙ Статус-бар пользователя */
+.user-status-bar {
+  background: #ffffff; /* Чистый белый фон для максимального контраста */
+  color: #212529; /* Почти черный текст */
+  padding: 10px 20px;
+  border-radius: 8px; /* Чуть мягче углы */
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5); /* Глубокая тень */
+  border: none;
+}
+
+/* Стиль для текста статуса (Manager/Admin/Fan) */
+.user-status-bar span strong {
+  color: #007bff; /* Насыщенный синий цвет для роли */
+  text-transform: uppercase;
+  margin-left: 5px;
+}
+
+/* Кнопки */
+button {
+  cursor: pointer;
+  border: none;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.logout-btn {
+  background: rgba(239, 68, 68, 0.1);
+  color: #ef4444;
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  padding: 8px 16px;
+  border-radius: 8px;
+}
+
+.logout-btn:hover {
+  background: #ef4444;
+  color: white;
+  transform: translateY(-2px);
+}

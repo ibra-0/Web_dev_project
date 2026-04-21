@@ -1,0 +1,25 @@
+.score-badge {
+    background: #1e293b;
+    color: #f8fafc;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-weight: bold;
+    font-family: monospace;
+}
+.team-cell {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.team-logo {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+  border-radius: 4px;
+}
+
+.score-cell {
+  text-align: center;
+  font-weight: bold;
+}

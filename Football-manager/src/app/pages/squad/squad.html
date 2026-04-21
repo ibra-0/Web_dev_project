@@ -1,0 +1,166 @@
+<div class="pitch-container" [class.no-edit]="!canEdit">
+  <div class="football-pitch">
+    <div class="pitch-overlay"></div>
+
+    <!-- FORWARDS -->
+    <div class="pitch-line forwards">
+      <div class="player-slot side"
+           (click)="canEdit && selectPlayer(fwds.lw, 'LW')"
+           [class.selected]="selectedPlayer?.id === fwds.lw?.id"
+           [class.disabled]="!canEdit">
+
+        <div class="player-card"></div>
+        <div class="player-info">
+          <div class="player-name">{{ fwds.lw?.name || 'Empty' }}</div>
+          <span class="pos-badge">LW</span>
+        </div>
+      </div>
+
+      <div class="player-slot center"
+           (click)="canEdit && selectPlayer(fwds.st, 'ST')"
+           [class.selected]="selectedPlayer?.id === fwds.st?.id"
+           [class.disabled]="!canEdit">
+
+        <div class="player-card"></div>
+        <div class="player-info">
+          <div class="player-name">{{ fwds.st?.name || 'Empty' }}</div>
+          <span class="pos-badge">ST</span>
+        </div>
+      </div>
+
+      <div class="player-slot side"
+           (click)="canEdit && selectPlayer(fwds.rw, 'RW')"
+           [class.selected]="selectedPlayer?.id === fwds.rw?.id"
+           [class.disabled]="!canEdit">
+
+        <div class="player-card"></div>
+        <div class="player-info">
+          <div class="player-name">{{ fwds.rw?.name || 'Empty' }}</div>
+          <span class="pos-badge">RW</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- MIDFIELD -->
+    <div class="pitch-line midfielders">
+      <div class="player-slot"
+           (click)="canEdit && selectPlayer(mids.left, 'CM')"
+           [class.selected]="selectedPlayer?.id === mids.left?.id"
+           [class.disabled]="!canEdit">
+
+        <div class="player-card"></div>
+        <div class="player-info">
+          <div class="player-name">{{ mids.left?.name || 'Empty' }}</div>
+          <span class="pos-badge">CM</span>
+        </div>
+      </div>
+
+      <div class="player-slot offset-down"
+           (click)="canEdit && selectPlayer(mids.center, 'CDM')"
+           [class.selected]="selectedPlayer?.id === mids.center?.id"
+           [class.disabled]="!canEdit">
+
+        <div class="player-card"></div>
+        <div class="player-info">
+          <div class="player-name">{{ mids.center?.name || 'Empty' }}</div>
+          <span class="pos-badge">CDM</span>
+        </div>
+      </div>
+
+      <div class="player-slot"
+           (click)="canEdit && selectPlayer(mids.right, 'CM')"
+           [class.selected]="selectedPlayer?.id === mids.right?.id"
+           [class.disabled]="!canEdit">
+
+        <div class="player-card"></div>
+        <div class="player-info">
+          <div class="player-name">{{ mids.right?.name || 'Empty' }}</div>
+          <span class="pos-badge">CM</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- DEFENCE -->
+    <div class="pitch-line defenders">
+      <div class="player-slot"
+           (click)="canEdit && selectPlayer(defs.lb, 'LB')"
+           [class.selected]="selectedPlayer?.id === defs.lb?.id"
+           [class.disabled]="!canEdit">
+
+        <div class="player-card"></div>
+        <div class="player-info">
+          <div class="player-name">{{ defs.lb?.name || 'Empty' }}</div>
+          <span class="pos-badge">LB</span>
+        </div>
+      </div>
+
+      <div class="player-slot"
+           (click)="canEdit && selectPlayer(defs.cb1, 'CB')"
+           [class.selected]="selectedPlayer?.id === defs.cb1?.id"
+           [class.disabled]="!canEdit">
+
+        <div class="player-card"></div>
+        <div class="player-info">
+          <div class="player-name">{{ defs.cb1?.name || 'Empty' }}</div>
+          <span class="pos-badge">CB</span>
+        </div>
+      </div>
+
+      <div class="player-slot"
+           (click)="canEdit && selectPlayer(defs.cb2, 'CB')"
+           [class.selected]="selectedPlayer?.id === defs.cb2?.id"
+           [class.disabled]="!canEdit">
+
+        <div class="player-card"></div>
+        <div class="player-info">
+          <div class="player-name">{{ defs.cb2?.name || 'Empty' }}</div>
+          <span class="pos-badge">CB</span>
+        </div>
+      </div>
+
+      <div class="player-slot"
+           (click)="canEdit && selectPlayer(defs.rb, 'RB')"
+           [class.selected]="selectedPlayer?.id === defs.rb?.id"
+           [class.disabled]="!canEdit">
+
+        <div class="player-card"></div>
+        <div class="player-info">
+          <div class="player-name">{{ defs.rb?.name || 'Empty' }}</div>
+          <span class="pos-badge">RB</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- GOALKEEPER -->
+    <div class="pitch-line goalkeeper">
+      <div class="player-slot"
+           (click)="canEdit && selectPlayer(gks[0], 'GK')"
+           [class.selected]="selectedPlayer?.id === gks[0]?.id"
+           [class.disabled]="!canEdit">
+
+        <div class="player-card gk-card"></div>
+        <div class="player-info">
+          <div class="player-name">{{ gks[0]?.name || 'Empty' }}</div>
+          <span class="pos-badge">GK</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BENCH -->
+  <div class="bench-container">
+    <h3>Substitutes</h3>
+    <div class="bench-list">
+      <div class="bench-player"
+           *ngFor="let p of subs"
+           (click)="canEdit && selectPlayer(p, 'sub')"
+           [class.selected]="selectedPlayer?.id === p.id"
+           [class.disabled]="!canEdit">
+
+        <span class="bench-pos">{{ p.position }}</span>
+        <span class="bench-name">{{ p.name }}</span>
+        <span class="bench-rating">{{ p.rating || '99' }}</span>
+      </div>
+    </div>
+  </div>
+</div>

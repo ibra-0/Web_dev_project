@@ -1,0 +1,26 @@
+<div class="app-container">
+  @if (router.url !== '/login' && router.url !== '/signup') {
+    <header>
+     <h1>
+  <span class="ball-emoji">⚽</span> Football Manager System
+</h1>
+    </header>
+
+   
+
+    <nav>
+       <div class="nav-links">
+          <a routerLink="/clubs">🏟 Clubs</a>
+          <a routerLink="/players">👤 Players</a>
+          <a routerLink="/transfers">🔁 Transfers</a>
+          <a routerLink="/matches">⚽ Matches</a>
+          <a routerLink="/tournaments">🏆 Tournaments</a>
+       </div>
+       <button (click)="logout()" class="logout-btn">Logout</button>
+    </nav>
+  }
+
+  <main>
+    <router-outlet></router-outlet>
+  </main>
+</div>

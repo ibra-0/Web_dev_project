@@ -1,0 +1,43 @@
+.market-value-info {
+    margin-top: 10px;
+    padding: 12px;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-left: 4px solid #3b82f6;
+    border-radius: 6px;
+}
+
+.value-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.value-amount {
+    color: #059669;
+    font-size: 1.1rem;
+}
+
+.range-row small {
+    color: #64748b;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.range-badges {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.85rem;
+}
+
+.badge {
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-weight: 600;
+}
+
+.badge.min { background: #fee2e2; color: #b91c1c; }
+.badge.max { background: #dcfce7; color: #15803d; }
+.arrow { color: #94a3b8; }
